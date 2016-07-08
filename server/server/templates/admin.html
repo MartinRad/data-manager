@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<script>
+	$(function() {
+	$( "#sortable" ).sortable();
+	$( "#sortable" ).disableSelection();
+	});
+</script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">  
+<div class="row">  
+<div class="center-block">  
+
+	
+<title>Admin {{collection.name_collection}} </title>
+<h1>Admin {{collection.name_collection}}</h1>
+
+
+<form action="" method=post enctype=multipart/form-data>
+<input type="submit" name="btn" value="VIEW" class="btn btn-warning"> 
+<input type="submit" name="btn" value="SAVE" class="btn btn-info"> 
+
+<p>
+<i> {{message}} </i>
+</p>
+
+<p>
+	<div class="form-group">
+	<label> Edit name_collection : </label>
+		<input type="text" name="name_collection" value={{collection["name_collection"]}}>
+	</label>
+	</div>
+	<div class="form-group">
+	<label> Edit table TD name : </label>
+		<input type="text" name="table_td" value={{collection["table_td"]}}>
+	</label>
+	</div>
+</p>
+<p>
+
+<input type="submit" name="btn" value="DELETE COLUMN" class="btn btn-danger">
+<table class="table table-bordered">
+	<thead>
+
+		<tr>
+		<th>Delete</th>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Position</th>
+		{% for action in actions %}
+		<th>{{action}}</th>
+		{% endfor %}
+		<th></th>
+		</tr>
+	</thead>
+
+	<tbody id="sortable">
+
+
+		{% for column_id in dict_columns_for["order"] %}			
+			<tr>
+				<td> <input type="checkbox" name="list_deleted" value={{column_id}} > </td>
+				<td contenteditable='true' name="name_column"> <input type=text name="name_column" id={{column_id}} value={{collection["columns"][column_id]["name"]}}> </td>
+				<td> <select name="type_column">
+					{% for type in ["string","float","date","boolean"] %}
+						{% if type==collection["columns"][column_id]["type"] %} 
+							<option value={{type}} selected="selected">{{type}}</option>
+						{% else %}
+							<option value={{type}}>{{type}}</option>
+						{% endif %}
+					{% endfor %}
+					</select>
+				<td  name="position"> <input type=text name="position_column" id={{column_id}} value={{collection["columns"][column_id]["position"]}}> </td>
+				</td>
+				{% for action in actions %}
+					{% if column_id in dict_columns_for[action] %}
+						<td> <input type="checkbox" name={{action}} value={{column_id}} checked> </td>
+					{% else %}
+						<td> <input type="checkbox" name={{action}} value={{column_id}}> </td>
+					{% endif %}
+				{% endfor %}
+				<td><span class="glyphicon glyphicon-sort" aria-hidden="true"></span> </td>
+			</tr>
+		{% endfor %}
+
+	</tbody>
+</table>
+<label> Add New Column :  
+<select name="column_to_add" > 
+{% for item in all_columns %}
+{% if not item["name"] == "NewColumn" %}
+	<option  value={{item._id}}> {{item.name}}</option>
+{%endif%}
+{%endfor%}
+	<option  value="other" selected="">other</option>
+</select>
+<input type="submit" name="btn" value="ADD" class="btn btn-sucess btn-sm"> 
+
+
+
+</p>
+
+<a href="/view/{{collection.name}} "> Back </a>
+
+</form>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

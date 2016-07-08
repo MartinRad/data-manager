@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+
+<div class="container">  
+<div class="row">  
+<div class="center-block">  
+
+	
+<title>Create New Collection</title>
+<h1>Create New Collection</h1>
+
+
+<form action="" method=post enctype=multipart/form-data class="form-horizontal">
+<input type="submit" name="btn" value="CANCEL" class="btn btn-warning"> 
+<input type="submit" name="btn" value="CREATE" class="btn btn-info"> 
+
+<p>
+<i> {{message}} </i>
+</p>
+
+<p>
+	<div class="form-group">
+	<label> Name of collection : </label>
+		<input type="text" name="name_collection" value="">
+	</label>
+	</div>
+	<div class="form-group">
+	<label> Table TD name : </label>
+		<input type="text" name="table_td" value="">
+	</label>
+	</div>
+	<div class="form-group">
+	<label> Functions to apply </label>
+		{% for function_id in all_functions %}
+		<input type="checkbox" name="functions_to_apply" value={{function_id}}> {{all_functions[function_id]}}
+		{% endfor %}
+	</label>
+	</div>
+	<div class="form-group">
+	<label> Columns </label>
+	<div class="checkbox">
+	{% for item in all_columns %}
+	{% if not item["name"] == "NewColumn" %}
+  	<label>
+    	<input type="checkbox" name="columns_to_use" value={{item._id}}>
+    	{{item.name}}
+  	</label>
+  	{%endif%}
+  	{%endfor%}
+	</div>
+	</div>
+
+	
+</p>
+
+<a href="/view/{{collection}} "> Back </a>
+
+</form>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
