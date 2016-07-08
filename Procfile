@@ -1,1 +1,1 @@
-web: gunicorn server.server:app --timeout 10000 --workers 5 --log-file -
+web: gunicorn server.server:app --timeout 10000 --workers 3 --log-file -
