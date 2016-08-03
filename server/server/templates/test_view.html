@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+
+
+{% block body %}
+
+
+<div class="container">  
+<div class="row">  
+<div class="center-block">  
+
+	
+
+<title>{{collection.get("name_collection")}}</title>
+<h1>{{collection.get("name_collection")}}</h1>
+
+
+<form action="" method=post enctype=multipart/form-data>
+<div>
+<input type="submit" name="btn" value="CREATE" class="btn btn-info"> 
+<input type="submit" name="btn" value="SEND" class="btn btn-warning"> 
+<input type="submit" name="btn" value="EDIT" class="btn btn-primary"> 
+<input type="submit" name="btn" value="CHECK" class="btn btn-sucess"> 
+</div>
+
+</form>
+
+{% if message=="Table send to Treasure Data" %}
+<div class="alert alert-success" role="alert">{{message}}</div>
+{% elif message=="Failed to send to Treasure Data" %}
+<div class="alert alert-danger" role="alert">{{message}}</div>
+{% endif %}
+
+<p>
+
+<table class="table" id="table_id">
+	<td>
+		<tr>
+			<th>1</th>
+			<th>2</th>
+			<th>3</th>
+			<th>4</th>
+		</tr>
+	</td>
+
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+
+
+
+	</tbody>
+
+
+
+
+</table>
+
+</p>
+
+{% endblock %}
+
+
+</div>
+</div>
+</div>
+</body>

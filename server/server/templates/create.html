@@ -1,0 +1,78 @@
+
+{% extends "layout.html" %}
+
+{% block head %}
+ 
+	<script type="text/javascript" src="/static/DataTables/datatables.min.js"></script>
+	<script>
+	$(document).ready( function () {
+    	$('#table_id').DataTable();
+		} );		
+	</script>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">  
+<div class="row">  
+<div class="center-block">  
+
+	
+
+<title>Create New {{collection.get("name_collection")}}</title>
+<h1>Create New {{collection.get("name_collection")}}</h1>
+
+
+<form action="" method=post enctype=multipart/form-data class="form-horizontal">
+
+
+{% for column_id in dict_columns_for["create"] %}
+	{% if column_id in dict_columns_for["close_values"] %}
+		{% if column_id in dict_columns_for["create_several"] %}
+			<div class="form-group">
+				<label for={{column_id}} > Select {{collection.get("columns").get(column_id).get("name")}} : </label>
+				<div id={{column_id}}>
+				{% for item in values_for_columns.get(column_id).get("values") %}
+					<label class="checkbox-inline">
+		  				<input type="checkbox" name={{column_id}} value={{item}}> {{item}}
+					</label>
+				{% endfor %}
+				</div>
+			</div>
+		{% else %}
+			<div class="form-group">
+				<label for={{column_id}} > Select {{collection.get("columns").get(column_id).get("name")}} : </label>
+				<div id={{column_id}}>
+				<select type="select" name={{column_id}}>
+				{% for item in values_for_columns.get(column_id).get("values") %}
+		  			<option value={{item}}> {{item}} </option>
+				{% endfor %}
+				</select>
+				</div>
+			</div>
+		{%endif%}
+	{% else %}
+		<div class="form-group">
+			<label for={{column_id}} > Enter {{collection.get("columns").get(column_id).get("name")}} : </label>
+			<div id={{column_id}}>
+	  			<input type={{collection.get("columns").get(column_id).get("type")}} name={{column_id}} value="">
+			</div>
+		</div>
+	{%endif%}
+{%endfor%}
+
+
+
+
+<div class="form-group">
+<input type="submit" name="btn" value="CREATE" class="btn btn-info"> 
+<input type="submit" name="btn" value="CANCEL" class="btn btn-warning">
+</div>
+
+</form>
+
+{% endblock %}
+</div>
+</div>
+</div>

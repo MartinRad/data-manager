@@ -69,7 +69,11 @@ $(document).ready(function() {
 			{% if item[is_active_id] == "True" %}
 			<tr class="success">
 				{% for column_id in dict_columns_for["view"] %} 
-					<td> {{item[column_id]}} </td>
+					{% if column_id in dict_columns_for["edit"] %} 
+						<td contenteditable='true'> {{item[column_id]}} </td>
+					{%else%}
+						<td contenteditable='true'> {{item[column_id]}} </td>
+					{%endif%}
 				{% endfor %}
 				{% if now-item[created_at_id] < delta %}
 				<td><span class="label label-default">New</span></td>
@@ -81,9 +85,11 @@ $(document).ready(function() {
 			{% else %}
 			<tr>
 				{% for column_id in dict_columns_for["view"] %} 
-				
-					<td> {{item[column_id]}} </td>
-			
+					{% if column_id in dict_columns_for["edit"] %} 
+						<td contenteditable='true'> {{item[column_id]}} </td>
+					{%else%}
+						<td contenteditable='true'> {{item[column_id]}} </td>
+					{%endif%}
 				{% endfor %}
 				{% if now-item[created_at_id] < delta %}
 				<td><span class="label label-default">New</span></td>
