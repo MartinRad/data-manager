@@ -15,9 +15,7 @@ import datetime
 import json
 import uuid
 import operator
-from server.db import models
 from bson import ObjectId
-
 
 ############## VARIABLES SET-UP ####################
 
@@ -34,7 +32,7 @@ variables_for_admin_collection=["name_collection","table_td","name_column","type
 
 def get_all_documents(db,name_collection):
     all_docs=[]
-    for item in db.get_collection(name_collection).find():
+    for item in db.name_collection.find():
         all_docs.append(item)
     return all_docs
 

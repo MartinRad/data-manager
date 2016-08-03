@@ -14,8 +14,6 @@ app.config['BASIC_AUTH_PASSWORD'] = 'rad0109'
 app.config['DEBUG']=True
 basic_auth = BasicAuth(app)
 
-db = MongoEngine(app)
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.secret_key = 'putyoursecretkey'

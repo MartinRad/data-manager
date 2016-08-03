@@ -3,17 +3,15 @@ import sys
 import os
 from flask import request, abort, redirect, url_for, render_template
 from server.server import app
-from server.db import models
+from server.db import connect
 from server.server.functions_model import *
 import pandas as pd
-from server.server import db
 from flask.ext.basicauth import BasicAuth
 
 
 basic_auth = BasicAuth(app)
-client=models.connect()
-db=models.connect_to_database(client)
 
+db = connect.write()
 
 @app.route('/hello')
 def hello_world():
@@ -30,7 +28,7 @@ def hello_world():
 @basic_auth.required
 def navigate():
     collection_names=[]
-    for item in db.get_collection(collection_for_parametres).find():
+    for item in db.collection_for_parametres.find():
         collection_names.append(item["name_collection"])
     if request.method == 'POST':
         for collection_name in collection_names :

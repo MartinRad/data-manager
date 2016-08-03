@@ -12,7 +12,6 @@ pycparser==2.10
 pymongo==2.8
 gunicorn==19.1.0
 Flask-BasicAuth==0.2.0
-facebookads == 2.5.1
 pandas == 0.17.1
 datetime == 4.0.1
 xlrd == 0.9.4
