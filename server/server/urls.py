@@ -28,13 +28,10 @@ def hello_world():
 @basic_auth.required
 def navigate():
     collection_names=[]
-<<<<<<< HEAD
     for item in db.collection_for_parametres.find():
         collection_names.append(item["name_collection"])
-=======
     for item in db.get_collection(collection_for_parametres).find():
         collection_names.append(item.get("name_collection"))
->>>>>>> 367169641c56033121d528f7489ba142ef949bb3
     if request.method == 'POST':
         for collection_name in collection_names :
             if request.form['btn']== collection_name :
